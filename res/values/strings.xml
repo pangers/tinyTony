@@ -3,5 +3,6 @@
 
 	<string name="app_name">Blank Project</string>
 	<string name="hello_world">Hello world!</string>
+	<string name="stat_title">Stats</string>
 
 </resources>
