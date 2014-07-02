@@ -45,17 +45,25 @@ public class taskListAdapter extends ArrayAdapter<taskData> {
 		// timeview.setText(taskData.get(position).getTime());
 
 		// Set border colour (background)
+		//blue colour
 		rowView.setBackgroundColor(0xFF0080ff);
 		// Count Down Timer
-		int refreshInterval = 1000;
-		int msInAMinute = 60000;
 		long timeDifference;
+		int refreshInterval = 1000;
+		final int msInAMinute = 60000;
+		final int msInASecond = 1000;
+
 		CountDownTimer countDown;
-		timeDifference = Integer.parseInt(taskData.get(position).getTime()) * msInAMinute;
+		timeDifference = Integer.parseInt(taskData.get(position).getTime())
+				* msInAMinute;
 		countDown = new CountDownTimer(timeDifference, refreshInterval) {
+			long minutes, seconds;
+
 			public void onTick(long millisUntilFinished) {
-				timeview.setText(String
-						.valueOf(millisUntilFinished / 60000 + 1));
+				minutes = millisUntilFinished / msInAMinute;
+				seconds = (millisUntilFinished / msInASecond) % 60;
+				timeview.setText(String.valueOf(minutes) + ":"
+						+ String.valueOf(seconds));
 			}
 
 			public void onFinish() {
@@ -66,5 +74,4 @@ public class taskListAdapter extends ArrayAdapter<taskData> {
 
 		return rowView;
 	}
-
 }
