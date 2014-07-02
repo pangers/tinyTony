@@ -11,8 +11,9 @@ public class StatScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stats);
+		
 	}
-
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
