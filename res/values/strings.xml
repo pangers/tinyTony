@@ -10,5 +10,6 @@
 	<string name="timeremaining">Enter time remaining (in minutes)</string>
 	<string name="dialogtitle">New Task</string>
 	<string name="cancel">Cancel</string>
-
+	<string name="hello_world">hello world!</string>
+	
 </resources>

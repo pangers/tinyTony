@@ -102,8 +102,10 @@ public class taskListFragment extends Fragment implements
 				.findViewById(R.id.newtask);
 		EditText timeremaining = (EditText) dialog.getDialog().findViewById(
 				R.id.timeremaining);
+
 		String taskString = task.getText().toString();
 		String timeremainingString = timeremaining.getText().toString();
+
 		generateData(taskString, timeremainingString);
 
 	}

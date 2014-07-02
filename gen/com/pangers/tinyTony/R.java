@@ -18,6 +18,7 @@ public final class R {
         public static final int ic_menu_btn_add=0x7f020001;
         public static final int ic_menu_emoticons=0x7f020002;
         public static final int ic_menu_settings_holo_light=0x7f020003;
+        public static final int whitebackground=0x7f020004;
     }
     public static final class id {
         public static final int about=0x7f080008;
@@ -31,9 +32,10 @@ public final class R {
         public static final int timeremaining=0x7f080001;
     }
     public static final class layout {
-        public static final int newtaskdialog=0x7f030000;
-        public static final int taskfragment=0x7f030001;
-        public static final int tasklistitem=0x7f030002;
+        public static final int main=0x7f030000;
+        public static final int newtaskdialog=0x7f030001;
+        public static final int taskfragment=0x7f030002;
+        public static final int tasklistitem=0x7f030003;
     }
     public static final class menu {
         public static final int actions=0x7f070000;
@@ -44,6 +46,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int cancel=0x7f05000a;
         public static final int dialogtitle=0x7f050009;
+        public static final int hello_world=0x7f05000b;
         public static final int newtask=0x7f050007;
         public static final int settings=0x7f050003;
         public static final int taskname=0x7f050004;
