@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,11 @@ public class taskListAdapter extends ArrayAdapter<taskData> {
 
 	private final Context context;
 	private final ArrayList<taskData> taskData;
+	private long timeDifference, minutes, seconds;;
+	private int refreshInterval = 1000;
+	private int msInAMinute = 60000;
+	private int msInASecond = 1000;
+	private CountDownTimer countDown;
 
 	public taskListAdapter(Context context, ArrayList<taskData> taskData) {
 		super(context, R.layout.tasklistitem, taskData);
@@ -42,23 +48,15 @@ public class taskListAdapter extends ArrayAdapter<taskData> {
 
 		// Fill the rowView with data
 		taskview.setText(taskData.get(position).getTask());
-		// timeview.setText(taskData.get(position).getTime());
 
 		// Set border colour (background)
-		//blue colour
+		// blue colour
 		rowView.setBackgroundColor(0xFF0080ff);
+		
 		// Count Down Timer
-		long timeDifference;
-		int refreshInterval = 1000;
-		final int msInAMinute = 60000;
-		final int msInASecond = 1000;
-
-		CountDownTimer countDown;
-		timeDifference = Integer.parseInt(taskData.get(position).getTime())
-				* msInAMinute;
+		timeDifference = Long.valueOf(taskData.get(position).getTime())
+				- System.currentTimeMillis();
 		countDown = new CountDownTimer(timeDifference, refreshInterval) {
-			long minutes, seconds;
-
 			public void onTick(long millisUntilFinished) {
 				minutes = millisUntilFinished / msInAMinute;
 				seconds = (millisUntilFinished / msInASecond) % 60;

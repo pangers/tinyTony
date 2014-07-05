@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +23,8 @@ public class taskListFragment extends Fragment implements
 	private TextView titleView;
 	private ListView taskList;
 	private taskListAdapter adapter;
-	
+	private int msInAMinute = 60000;
+
 	public final static String NAV_DRAWER_POS = "navDrawerPos";
 
 	ArrayList<taskData> tasks = new ArrayList<taskData>();
@@ -95,7 +97,10 @@ public class taskListFragment extends Fragment implements
 				R.id.timeremaining);
 
 		String taskString = task.getText().toString();
-		String timeremainingString = timeremaining.getText().toString();
+		String timeremainingString = String.valueOf(Integer
+				.parseInt(timeremaining.getText().toString())
+				* msInAMinute
+				+ System.currentTimeMillis());
 
 		generateData(taskString, timeremainingString);
 		((taskListAdapter) taskList.getAdapter()).notifyDataSetChanged();

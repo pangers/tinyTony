@@ -47,8 +47,9 @@ public final class R {
         public static final int tasklistitem=0x7f030004;
     }
     public static final class menu {
-        public static final int addtaskactions=0x7f080000;
-        public static final int mainactions=0x7f080001;
+        public static final int actions=0x7f080000;
+        public static final int addtaskactions=0x7f080001;
+        public static final int mainactions=0x7f080002;
     }
     public static final class string {
         public static final int about=0x7f050002;
