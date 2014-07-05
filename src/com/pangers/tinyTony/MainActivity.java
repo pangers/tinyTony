@@ -7,7 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +27,7 @@ public class MainActivity extends FragmentActivity implements
 	private ListView drawerList;
 	private ActionBarDrawerToggle drawerToggle;
 
-	final static String NAV_DRAWER_POS = "navDrawerPos";
+	final static String TAG = "navDrawer";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +56,15 @@ public class MainActivity extends FragmentActivity implements
 		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
 				R.drawable.ic_drawer, R.string.draweropen, R.string.drawerclose) {
 			// Called when navigation drawer in closed state
-			public void onDrawerCloser(View view) {
+			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(title);
-				invalidateOptionsMenu(); //goes to onPrepareOptionsMenu()
+				invalidateOptionsMenu(); // goes to onPrepareOptionsMenu()
 			}
 
 			// Called when navigation drawer in open state
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(drawerTitle); //goes to onPrepareOptionsMenu()
-				invalidateOptionsMenu();
+				getActionBar().setTitle(drawerTitle); 
+				invalidateOptionsMenu();// goes to onPrepareOptionsMenu()
 			}
 		};
 		drawerLayout.setDrawerListener(drawerToggle);
@@ -71,14 +74,41 @@ public class MainActivity extends FragmentActivity implements
 		}
 	}
 
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.mainactions, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
 	// Called whenever invalidateOptionsMenu called
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
-		menu.findItem(R.id.add).setVisible(!drawerOpen);
+		if (getSupportFragmentManager().findFragmentByTag("newTaskList") != null) {
+			menu.findItem(R.id.add).setVisible(!drawerOpen);
+		}
 		menu.findItem(R.id.settings).setVisible(!drawerOpen);
 		menu.findItem(R.id.about).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// ActionBar home/up action toggle nav drawer
+		if (drawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		switch (item.getItemId()) {
+		case R.id.settings:
+
+			return true;
+
+		case R.id.about:
+
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override
@@ -86,7 +116,7 @@ public class MainActivity extends FragmentActivity implements
 			long id) {
 		selectItem(position);
 	}
-	
+
 	public void selectItem(int position) {
 		switch (position) {
 		case 0:
@@ -94,11 +124,12 @@ public class MainActivity extends FragmentActivity implements
 				// Pass selection position to next fragment
 				Fragment fragment = new taskListFragment();
 				Bundle args = new Bundle();
-				args.putInt(NAV_DRAWER_POS, position);
+				args.putInt(taskListFragment.NAV_DRAWER_POS, position);
 				fragment.setArguments(args);
 				// Inflate next fragment by replace
 				getSupportFragmentManager().beginTransaction()
-						.replace(R.id.contentframe, fragment, "newTaskList").commit();
+						.replace(R.id.contentframe, fragment, "newTaskList")
+						.commit();
 				// Update selected position in navigation drawer
 				drawerList.setItemChecked(position, true);
 				getActionBar().setTitle(drawerMenu[position]);
@@ -107,21 +138,22 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		}
 	}
-	
-	//When using ActionBarDrawerToggle, onPostCreate and onConfigurationChanged must be called
+
+	// When using ActionBarDrawerToggle, onPostCreate and onConfigurationChanged
+	// must be called
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		//Sync the toggle state after onRestoreInstanceState has occured
+		// Sync the toggle state after onRestoreInstanceState has occured
 		drawerToggle.syncState();
 	}
-	
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		//Pass any configuration change to the drawer toggle
+		// Pass any configuration change to the drawer toggle
 		drawerToggle.onConfigurationChanged(newConfig);
-		
+
 	}
 
 }

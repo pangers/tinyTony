@@ -22,6 +22,8 @@ public class taskListFragment extends Fragment implements
 	private TextView titleView;
 	private ListView taskList;
 	private taskListAdapter adapter;
+	
+	public final static String NAV_DRAWER_POS = "navDrawerPos";
 
 	ArrayList<taskData> tasks = new ArrayList<taskData>();
 
@@ -57,26 +59,15 @@ public class taskListFragment extends Fragment implements
 	}
 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.actions, menu);
+		inflater.inflate(R.menu.addtaskactions, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-
-			return true;
 
 		case R.id.add:
 			showNewTaskDialog();
-			return true;
-
-		case R.id.settings:
-
-			return true;
-
-		case R.id.about:
-
 			return true;
 
 		default:
