@@ -1,15 +1,25 @@
 <resources>
-	<string name="app_name">tinyTony</string>
-	<string name="testTitle">tinyTony Title</string>
-	<string name="about">About</string>
-	<string name="settings">Settings</string>
-	<string name="taskname">Task Name</string>
-	<string name="timeleft">2:39</string>
-	<string name="add">Add</string>
-	<string name="newtask">Enter a new task</string>
-	<string name="timeremaining">Enter time remaining (in minutes)</string>
-	<string name="dialogtitle">New Task</string>
-	<string name="cancel">Cancel</string>
-	<string name="hello_world">hello world!</string>
-	
+
+    <string name="app_name">tinyTony</string>
+    <string name="testTitle">tinyTony Title</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+    <string name="taskname">Task Name</string>
+    <string name="timeleft">2:39</string>
+    <string name="add">Add</string>
+    <string name="newtask">Enter a new task</string>
+    <string name="timeremaining">Enter time remaining (in minutes)</string>
+    <string name="dialogtitle">New Task</string>
+    <string name="cancel">Cancel</string>
+    <string name="hello_world">hello world!</string>
+
+    <string-array name="drawermenu">
+        <item>Tasks</item>
+        <item>Stats</item>
+        <item>Contacts</item>
+        <item>Settings</item>
+    </string-array>
+    <string name="draweropen">Open navigation drawer</string>
+    <string name="drawerclose">Close navigation drawer</string>
+
 </resources>
