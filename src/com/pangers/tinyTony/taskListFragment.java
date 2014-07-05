@@ -98,6 +98,7 @@ public class taskListFragment extends Fragment implements
 		String timeremainingString = timeremaining.getText().toString();
 
 		generateData(taskString, timeremainingString);
+		((taskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
 
 	}
 
