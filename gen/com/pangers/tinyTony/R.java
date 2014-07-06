@@ -62,6 +62,7 @@ public final class R {
         public static final int hello_world=0x7f05000b;
         public static final int newtask=0x7f050007;
         public static final int settings=0x7f050003;
+        public static final int stat_title=0x7f05000e;
         public static final int taskname=0x7f050004;
         public static final int testTitle=0x7f050001;
         public static final int timeleft=0x7f050005;
