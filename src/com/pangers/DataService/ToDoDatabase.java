@@ -132,7 +132,13 @@ public class ToDoDatabase {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param index the data you want to retrive
+	 * @return
+	 */
 	public TaskData getTask(int index) {
+		open();
 		TaskData gotTask = null;
 		int iRow = 0;
 		int iName = 0;
@@ -158,6 +164,7 @@ public class ToDoDatabase {
 		importance = c.getString(iRating);
 		gotTask = new TaskData(name, time);
 		gotTask.setImportance(importance);
+		close();
 		return gotTask;
 	}
 }
