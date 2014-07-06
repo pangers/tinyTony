@@ -1,12 +1,12 @@
 package com.pangers.tinyTony;
 
-public class taskData {
+public class TaskData {
 
 	private String task;
 	private String time;
 	private String importance;
 
-	public taskData(String task, String time) {
+	public TaskData(String task, String time) {
 		this.task = task;
 		this.time = time;
 	}

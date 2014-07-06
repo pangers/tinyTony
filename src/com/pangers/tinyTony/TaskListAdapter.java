@@ -12,17 +12,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class taskListAdapter extends ArrayAdapter<taskData> {
+public class TaskListAdapter extends ArrayAdapter<TaskData> {
 
 	private final Context context;
-	private final ArrayList<taskData> taskData;
+	private final ArrayList<TaskData> taskData;
 	private long timeDifference, minutes, seconds;;
 	private int refreshInterval = 1000;
 	private int msInAMinute = 60000;
 	private int msInASecond = 1000;
 	private CountDownTimer countDown;
 
-	public taskListAdapter(Context context, ArrayList<taskData> taskData) {
+	public TaskListAdapter(Context context, ArrayList<TaskData> taskData) {
 		super(context, R.layout.tasklistitem, taskData);
 
 		this.context = context;

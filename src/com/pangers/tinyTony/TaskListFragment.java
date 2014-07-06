@@ -17,17 +17,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class taskListFragment extends Fragment implements
-		AdapterView.OnItemClickListener, newTaskFragment.newTaskDialogListener {
+public class TaskListFragment extends Fragment implements
+		AdapterView.OnItemClickListener, NewTaskFragment.newTaskDialogListener {
 
 	private TextView titleView;
 	private ListView taskList;
-	private taskListAdapter adapter;
+	private TaskListAdapter adapter;
 	private int msInAMinute = 60000;
 
 	public final static String NAV_DRAWER_POS = "navDrawerPos";
 
-	ArrayList<taskData> tasks = new ArrayList<taskData>();
+	ArrayList<TaskData> tasks = new ArrayList<TaskData>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,15 +48,15 @@ public class taskListFragment extends Fragment implements
 		titleView = (TextView) getActivity().findViewById(R.id.testtitle);
 		taskList = (ListView) getActivity().findViewById(R.id.tasklist);
 		// Adapter to create task list
-		adapter = new taskListAdapter(getActivity(), tasks);
+		adapter = new TaskListAdapter(getActivity(), tasks);
 		// Create the ListView
 		taskList.setAdapter(adapter);
 
 	}
 
-	private ArrayList<taskData> generateData(String newtask,
+	private ArrayList<TaskData> generateData(String newtask,
 			String timeremaining) {
-		tasks.add(new taskData(newtask, timeremaining));
+		tasks.add(new TaskData(newtask, timeremaining));
 		return tasks;
 	}
 
@@ -84,7 +84,7 @@ public class taskListFragment extends Fragment implements
 	}
 
 	public void showNewTaskDialog() {
-		newTaskFragment dialog = new newTaskFragment();
+		NewTaskFragment dialog = new NewTaskFragment();
 		dialog.setTargetFragment(this, 0);
 		dialog.show(getFragmentManager(), "NewTaskDialog");
 	}
@@ -103,7 +103,7 @@ public class taskListFragment extends Fragment implements
 				+ System.currentTimeMillis());
 
 		generateData(taskString, timeremainingString);
-		((taskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
+		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
 
 	}
 

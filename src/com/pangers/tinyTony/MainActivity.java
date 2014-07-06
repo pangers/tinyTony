@@ -122,9 +122,9 @@ public class MainActivity extends FragmentActivity implements
 		case 0:
 			if (getSupportFragmentManager().findFragmentByTag("newTaskList") == null) {
 				// Pass selection position to next fragment
-				Fragment fragment = new taskListFragment();
+				Fragment fragment = new TaskListFragment();
 				Bundle args = new Bundle();
-				args.putInt(taskListFragment.NAV_DRAWER_POS, position);
+				args.putInt(TaskListFragment.NAV_DRAWER_POS, position);
 				fragment.setArguments(args);
 				// Inflate next fragment by replace
 				getSupportFragmentManager().beginTransaction()

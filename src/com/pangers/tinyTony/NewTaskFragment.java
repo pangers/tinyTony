@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 
-public class newTaskFragment extends DialogFragment {
+public class NewTaskFragment extends DialogFragment {
 
 	public interface newTaskDialogListener {
 		public void onDialogPositiveClick(DialogFragment dialog);
@@ -45,7 +45,7 @@ public class newTaskFragment extends DialogFragment {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								newTaskListener
-										.onDialogPositiveClick(newTaskFragment.this);
+										.onDialogPositiveClick(NewTaskFragment.this);
 							}
 						})
 				.setNegativeButton(R.string.cancel,
@@ -55,7 +55,7 @@ public class newTaskFragment extends DialogFragment {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								newTaskListener
-										.onDialogNegativeClick(newTaskFragment.this);
+										.onDialogNegativeClick(NewTaskFragment.this);
 							}
 						});
 		return builder.create();
