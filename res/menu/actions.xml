@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_menu_btn_add"
+        android:showAsAction="always"
+        android:title="@string/add">
+    </item>
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_menu_settings_holo_light"
+        android:title="@string/settings">
+    </item>
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_menu_emoticons"
+        android:title="@string/about">
+    </item>
+
+</menu>
