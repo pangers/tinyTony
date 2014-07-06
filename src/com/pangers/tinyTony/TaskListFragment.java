@@ -39,7 +39,6 @@ public class TaskListFragment extends Fragment implements
 		setRetainInstance(true);
 		// Inflate the fragment
 		View result = inflater.inflate(R.layout.taskfragment, container, false);
-		//instantiate the databse 
 		return result;
 	}
 
@@ -50,6 +49,7 @@ public class TaskListFragment extends Fragment implements
 		// Find views
 		titleView = (TextView) getActivity().findViewById(R.id.testtitle);
 		taskList = (ListView) getActivity().findViewById(R.id.tasklist);
+		//instantiate the database
 		// Adapter to create task list
 		adapter = new TaskListAdapter(getActivity(), tasks);
 		// Create the ListView
@@ -59,7 +59,11 @@ public class TaskListFragment extends Fragment implements
 
 	private ArrayList<TaskData> generateData(String newtask,
 			String timeremaining) {
-		tasks.add(new TaskData(newtask, timeremaining));
+		TaskData task = new TaskData(newtask, timeremaining);
+		tasks.add(task);
+//		database.open();
+		database.insertNewTask(task);
+//		database.close();
 		return tasks;
 	}
 
@@ -106,6 +110,8 @@ public class TaskListFragment extends Fragment implements
 				+ System.currentTimeMillis());
 
 		generateData(taskString, timeremainingString);
+		//pass information into the db
+	
 		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
 
 	}
@@ -113,5 +119,10 @@ public class TaskListFragment extends Fragment implements
 	@Override
 	public void onDialogNegativeClick(DialogFragment dialog) {
 		dialog.getDialog().dismiss();
+	}
+
+	public void setDataBase(ToDoDatabase database2) {
+		database = database2;
+		
 	}
 }

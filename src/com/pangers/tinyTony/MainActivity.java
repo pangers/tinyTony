@@ -1,5 +1,7 @@
 package com.pangers.tinyTony;
 
+import com.pangers.DataService.ToDoDatabase;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -21,7 +23,7 @@ public class MainActivity extends FragmentActivity implements
 	private String[] drawerMenu;
 	private CharSequence drawerTitle;
 	private CharSequence title;
-
+	private ToDoDatabase database;
 	private DrawerLayout drawerLayout;
 	private ListView drawerList;
 	private ActionBarDrawerToggle drawerToggle;
@@ -32,7 +34,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		database = new ToDoDatabase(this);
 		title = drawerTitle = getTitle();
 		// Setting up navigation drawer
 		drawerMenu = getResources().getStringArray(R.array.drawermenu);
@@ -122,6 +124,7 @@ public class MainActivity extends FragmentActivity implements
 			if (getSupportFragmentManager().findFragmentByTag("newTaskList") == null) {
 				// Pass selection position to next fragment
 				Fragment fragment = new TaskListFragment();
+				((TaskListFragment) fragment).setDataBase(database);
 				Bundle args = new Bundle();
 				args.putInt(TaskListFragment.NAV_DRAWER_POS, position);
 				fragment.setArguments(args);
