@@ -2,6 +2,8 @@ package com.pangers.tinyTony;
 
 import java.util.ArrayList;
 
+import com.pangers.DataService.ToDoDatabase;
+
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -24,7 +26,7 @@ public class TaskListFragment extends Fragment implements
 	private ListView taskList;
 	private TaskListAdapter adapter;
 	private int msInAMinute = 60000;
-
+	ToDoDatabase database;
 	public final static String NAV_DRAWER_POS = "navDrawerPos";
 
 	ArrayList<TaskData> tasks = new ArrayList<TaskData>();
@@ -37,6 +39,7 @@ public class TaskListFragment extends Fragment implements
 		setRetainInstance(true);
 		// Inflate the fragment
 		View result = inflater.inflate(R.layout.taskfragment, container, false);
+		//instantiate the databse 
 		return result;
 	}
 

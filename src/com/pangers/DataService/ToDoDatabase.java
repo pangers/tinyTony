@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.pangers.tinyTony.TaskData;
 
 public class ToDoDatabase {
-	private final static String TAG = "ToDoSQL";
+	private final static String TAG = "ToDoDatabase";
 	public static final String KEY_ROWID = "_id";
 	public static final String KEY_NAME = "task_name";
 	public static final String KEY_RATING = "task_importance";
@@ -100,7 +100,6 @@ public class ToDoDatabase {
 		 String time = task.getTime();
 		 createEntry(name, importance, time);
 		 return addSuccess;
-		
 	}
 	
 	public TaskData getTask(int index){

@@ -18,7 +18,6 @@ import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity implements
 		ListView.OnItemClickListener {
-
 	private String[] drawerMenu;
 	private CharSequence drawerTitle;
 	private CharSequence title;
