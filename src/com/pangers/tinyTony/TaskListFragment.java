@@ -68,9 +68,7 @@ public class TaskListFragment extends Fragment implements
 			String timeremaining) {
 		TaskData task = new TaskData(newtask, timeremaining);
 		tasks.add(task);
-//		database.open();
 		database.insertNewTask(task);
-//		database.close();
 		return tasks;
 	}
 
