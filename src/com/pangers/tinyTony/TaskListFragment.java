@@ -2,9 +2,12 @@ package com.pangers.tinyTony;
 
 import java.util.ArrayList;
 
+import com.pangers.DataService.ToDoDatabase;
+
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,16 +19,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class taskListFragment extends Fragment implements
-		AdapterView.OnItemClickListener, newTaskFragment.newTaskDialogListener {
+public class TaskListFragment extends Fragment implements
+		AdapterView.OnItemClickListener, NewTaskFragment.newTaskDialogListener {
 
 	private TextView titleView;
 	private ListView taskList;
-	private taskListAdapter adapter;
-	
+	private TaskListAdapter adapter;
+	private int msInAMinute = 60000;
+	ToDoDatabase database;
 	public final static String NAV_DRAWER_POS = "navDrawerPos";
 
-	ArrayList<taskData> tasks = new ArrayList<taskData>();
+	ArrayList<TaskData> tasks = new ArrayList<TaskData>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,16 +49,21 @@ public class taskListFragment extends Fragment implements
 		// Find views
 		titleView = (TextView) getActivity().findViewById(R.id.testtitle);
 		taskList = (ListView) getActivity().findViewById(R.id.tasklist);
+		//instantiate the database
 		// Adapter to create task list
-		adapter = new taskListAdapter(getActivity(), tasks);
+		adapter = new TaskListAdapter(getActivity(), tasks);
 		// Create the ListView
 		taskList.setAdapter(adapter);
 
 	}
 
-	private ArrayList<taskData> generateData(String newtask,
+	private ArrayList<TaskData> generateData(String newtask,
 			String timeremaining) {
-		tasks.add(new taskData(newtask, timeremaining));
+		TaskData task = new TaskData(newtask, timeremaining);
+		tasks.add(task);
+//		database.open();
+		database.insertNewTask(task);
+//		database.close();
 		return tasks;
 	}
 
@@ -82,7 +91,7 @@ public class taskListFragment extends Fragment implements
 	}
 
 	public void showNewTaskDialog() {
-		newTaskFragment dialog = new newTaskFragment();
+		NewTaskFragment dialog = new NewTaskFragment();
 		dialog.setTargetFragment(this, 0);
 		dialog.show(getFragmentManager(), "NewTaskDialog");
 	}
@@ -95,15 +104,25 @@ public class taskListFragment extends Fragment implements
 				R.id.timeremaining);
 
 		String taskString = task.getText().toString();
-		String timeremainingString = timeremaining.getText().toString();
+		String timeremainingString = String.valueOf(Integer
+				.parseInt(timeremaining.getText().toString())
+				* msInAMinute
+				+ System.currentTimeMillis());
 
 		generateData(taskString, timeremainingString);
-		((taskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
+		//pass information into the db
+	
+		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
 
 	}
 
 	@Override
 	public void onDialogNegativeClick(DialogFragment dialog) {
 		dialog.getDialog().dismiss();
+	}
+
+	public void setDataBase(ToDoDatabase database2) {
+		database = database2;
+		
 	}
 }
