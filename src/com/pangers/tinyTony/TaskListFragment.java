@@ -1,12 +1,17 @@
 package com.pangers.tinyTony;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import com.pangers.DataService.ToDoDatabase;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +33,8 @@ public class TaskListFragment extends Fragment implements
 	private int msInAMinute = 60000;
 	ToDoDatabase database;
 	public final static String NAV_DRAWER_POS = "navDrawerPos";
+	private int editTextTaskFlag = 0;
+	private int editTextTimeFlag = 0; 
 
 	ArrayList<TaskData> tasks = new ArrayList<TaskData>();
 
@@ -95,7 +102,7 @@ public class TaskListFragment extends Fragment implements
 		dialog.setTargetFragment(this, 0);
 		dialog.show(getFragmentManager(), "NewTaskDialog");
 	}
-
+	
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialog) {
 		EditText task = (EditText) dialog.getDialog()

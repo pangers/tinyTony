@@ -5,20 +5,42 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 
 public class NewTaskFragment extends DialogFragment {
 
+	private AlertDialog dialog;
+	newTaskDialogListener newTaskListener;
+	private EditText task;
+	private EditText timeremaining;
+	private int editTextTaskFlag = 0;
+	private int editTextTimeFlag = 0;
+	private String textTask = null;
+	private String textTime = null;
+	private final static String TASK_FLAG = "taskFlag";
+	private final static String TIME_FLAG = "timeFlag";
+	private final static String TASK_TEXT = "taskText";
+	private final static String TIME_TEXT = "timeText";
+
 	public interface newTaskDialogListener {
 		public void onDialogPositiveClick(DialogFragment dialog);
+
 		public void onDialogNegativeClick(DialogFragment dialog);
 	}
-
-	newTaskDialogListener newTaskListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			editTextTaskFlag = savedInstanceState.getInt(TASK_FLAG);
+			editTextTimeFlag = savedInstanceState.getInt(TIME_FLAG);
+			textTask = savedInstanceState.getString(TASK_TEXT);
+			textTime = savedInstanceState.getString(TIME_TEXT);
+		}
 		try {
 			newTaskListener = (newTaskDialogListener) getTargetFragment();
 		} catch (ClassCastException e) {
@@ -57,6 +79,96 @@ public class NewTaskFragment extends DialogFragment {
 										.onDialogNegativeClick(NewTaskFragment.this);
 							}
 						});
-		return builder.create();
+
+		dialog = builder.create();
+		return dialog;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		task = (EditText) getDialog().findViewById(R.id.newtask);
+		timeremaining = (EditText) getDialog().findViewById(R.id.timeremaining);
+		if (editTextTaskFlag == 0 || editTextTimeFlag == 0) {
+			dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+		}
+		if (textTask != null) {
+			task.setText(textTask);
+		}
+		if (textTime != null) {
+			timeremaining.setText(textTime);
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();		
+		watchTaskEditText(task);
+		watchTimeEditText(timeremaining);
+	}
+
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putInt(TASK_FLAG, editTextTaskFlag);
+		outState.putInt(TIME_FLAG, editTextTimeFlag);
+		outState.putString(TASK_TEXT, task.getText().toString());
+		outState.putString(TIME_TEXT, timeremaining.getText().toString());
+	}
+
+	public void watchTaskEditText(EditText task) {
+		task.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// Check if task edit text is empty.
+				if (TextUtils.isEmpty(s.toString().trim()) != true) {
+					editTextTaskFlag = 1;
+					if (editTextTimeFlag == 1) {
+						dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(
+								true);
+					}
+				} else {
+					editTextTaskFlag = 0;
+					dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+				}
+			}
+		});
+	}
+
+	public void watchTimeEditText(EditText timeremaining) {
+		timeremaining.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// Check if time edit text is empty.
+				if (TextUtils.isEmpty(s.toString().trim()) != true) {
+					editTextTimeFlag = 1;
+					if (editTextTaskFlag == 1) {
+						dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(
+								true);
+					}
+				} else {
+					editTextTimeFlag = 0;
+					dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+				}
+			}
+		});
 	}
 }
