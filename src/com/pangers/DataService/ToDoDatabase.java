@@ -1,5 +1,7 @@
 package com.pangers.DataService;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -76,7 +78,7 @@ public class ToDoDatabase {
 	}
 
 	public void close() {
-			ourHelper.close();
+		ourHelper.close();
 	}
 
 	private long createEntry(String name, String importance, String date) {
@@ -100,8 +102,9 @@ public class ToDoDatabase {
 		String name = task.getTask();
 		String importance = "neutral";
 		String time = task.getTime();
-		createEntry(name, "neutra", time);
+		createEntry(name, "neutral", time);
 		getData();
+		getTaskList();
 		close();
 		return addSuccess;
 	}
@@ -125,7 +128,6 @@ public class ToDoDatabase {
 			result = result + c.getString(iRow) + "###" + c.getString(iName)
 					+ "###" + c.getString(iRating) + "###" + c.getString(iDate)
 					+ "\n";
-			Log.d(TAG, c.getString(iName));
 		}
 		Log.d(TAG, result);
 
@@ -134,7 +136,8 @@ public class ToDoDatabase {
 
 	/**
 	 * 
-	 * @param index the data you want to retrive
+	 * @param index
+	 *            the data you want to retrieve
 	 * @return
 	 */
 	public TaskData getTask(int index) {
@@ -166,5 +169,42 @@ public class ToDoDatabase {
 		gotTask.setImportance(importance);
 		close();
 		return gotTask;
+	}
+
+	/**
+	 * get tasks in an ArrayList
+	 * 
+	 * @return
+	 */
+	public ArrayList<TaskData> getTaskList() {
+		ArrayList<TaskData> taskList = new ArrayList<TaskData>();
+		open();
+		TaskData gotTask = null;
+		int iRow = 0;
+		int iName = 0;
+		int iRating = 0;
+		int iDate = 0;
+		String name = "";
+		String time = "";
+		String importance = "";
+		String columns[] = new String[] { KEY_ROWID, KEY_NAME, KEY_RATING,
+				KEY_DATE };
+		Cursor c = ourDataBase.query(DATA_TABLE, columns, null, null, null,
+				null, null);
+		iRow = c.getColumnIndex(KEY_ROWID);
+		iName = c.getColumnIndex(KEY_NAME);
+		iRating = c.getColumnIndex(KEY_RATING);
+		iDate = c.getColumnIndex(KEY_DATE);
+		// move cursor to first and then traverse through the database
+		for (c.moveToFirst(); c.moveToNext();) {
+			name = c.getString(iName);
+			time = c.getString(iDate);
+			importance = c.getString(iRating);
+			gotTask = new TaskData(name, time);
+			gotTask.setImportance(importance);
+			taskList.add(gotTask);
+		}
+		close();
+		return taskList;
 	}
 }

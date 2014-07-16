@@ -34,8 +34,7 @@ public class TaskListFragment extends Fragment implements
 	ToDoDatabase database;
 	public final static String NAV_DRAWER_POS = "navDrawerPos";
 	private int editTextTaskFlag = 0;
-	private int editTextTimeFlag = 0; 
-
+	private int editTextTimeFlag = 0;
 	ArrayList<TaskData> tasks = new ArrayList<TaskData>();
 
 	@Override
@@ -56,21 +55,19 @@ public class TaskListFragment extends Fragment implements
 		// Find views
 		titleView = (TextView) getActivity().findViewById(R.id.testtitle);
 		taskList = (ListView) getActivity().findViewById(R.id.tasklist);
-		//instantiate the database
+		// Gets tasks from database in form of array
+		tasks = database.getTaskList();
 		// Adapter to create task list
 		adapter = new TaskListAdapter(getActivity(), tasks);
 		// Create the ListView
 		taskList.setAdapter(adapter);
-
 	}
 
 	private ArrayList<TaskData> generateData(String newtask,
 			String timeremaining) {
 		TaskData task = new TaskData(newtask, timeremaining);
 		tasks.add(task);
-//		database.open();
 		database.insertNewTask(task);
-//		database.close();
 		return tasks;
 	}
 
@@ -102,7 +99,7 @@ public class TaskListFragment extends Fragment implements
 		dialog.setTargetFragment(this, 0);
 		dialog.show(getFragmentManager(), "NewTaskDialog");
 	}
-	
+
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialog) {
 		EditText task = (EditText) dialog.getDialog()
@@ -117,8 +114,8 @@ public class TaskListFragment extends Fragment implements
 				+ System.currentTimeMillis());
 
 		generateData(taskString, timeremainingString);
-		//pass information into the db
-	
+		// pass information into the db
+
 		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
 
 	}
@@ -131,4 +128,5 @@ public class TaskListFragment extends Fragment implements
 	public void setDataBase(ToDoDatabase database2) {
 		database = database2;
 	}
+
 }
