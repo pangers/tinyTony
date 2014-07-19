@@ -63,12 +63,11 @@ public class TaskListFragment extends Fragment implements
 		taskList.setAdapter(adapter);
 	}
 
-	private ArrayList<TaskData> generateData(String newtask,
-			String timeremaining) {
+	private void generateData(String newtask, String timeremaining) {
 		TaskData task = new TaskData(newtask, timeremaining);
 		tasks.add(task);
 		database.insertNewTask(task);
-		return tasks;
+		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
 	}
 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -114,10 +113,6 @@ public class TaskListFragment extends Fragment implements
 				+ System.currentTimeMillis());
 
 		generateData(taskString, timeremainingString);
-		// pass information into the db
-
-		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
-
 	}
 
 	@Override

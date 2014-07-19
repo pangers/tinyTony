@@ -20,12 +20,8 @@ public class ToDoDatabase {
 	public static final String KEY_RATING = "task_importance";
 	public static final String KEY_DATE = "task_create_date";
 	public static final String KEY_MODE = "task_mode";
-	private static final String DATA_NAME = "TO_DO";
-	private static final String DATA_TABLE = "ToDo";
-	private static final int DATA_VERSION = 1;
-	public static final String KEY_STAGEONE = "stage_one";
-	public static final String KEY_STAGETWO = "stage_two";
-	private static final String DATA_HEXTABLE = "hextable";
+	private static final String DATA_TABLE = "task_database";
+	private static final int DATABASE_VERSION = 1;
 
 	private DbHelper ourHelper;
 	private Context alexander;
@@ -72,7 +68,7 @@ public class ToDoDatabase {
 	}
 
 	public ToDoDatabase open() throws SQLException {
-		ourHelper = new DbHelper(alexander, KEY_NAME, null, 1);
+		ourHelper = new DbHelper(alexander, DATA_TABLE, null, DATABASE_VERSION);
 		ourDataBase = ourHelper.getWritableDatabase();
 		return this;
 	}
@@ -102,7 +98,7 @@ public class ToDoDatabase {
 		String name = task.getTask();
 		String importance = "neutral";
 		String time = task.getTime();
-		createEntry(name, "neutral", time);
+		createEntry(name, importance, time);
 		getData();
 		getTaskList();
 		close();
@@ -114,7 +110,7 @@ public class ToDoDatabase {
 		int iName;
 		int iRating;
 		int iDate;
-		String result = null;
+		StringBuffer result = new StringBuffer();
 		String columns[] = new String[] { KEY_ROWID, KEY_NAME, KEY_RATING,
 				KEY_DATE };
 		Cursor c = ourDataBase.query(DATA_TABLE, columns, null, null, null,
@@ -123,15 +119,20 @@ public class ToDoDatabase {
 		iName = c.getColumnIndex(KEY_NAME);
 		iRating = c.getColumnIndex(KEY_RATING);
 		iDate = c.getColumnIndex(KEY_DATE);
-		for (c.moveToFirst(); !c.isAfterLast() && !c.isBeforeFirst(); c
-				.moveToNext()) {
-			result = result + c.getString(iRow) + "###" + c.getString(iName)
-					+ "###" + c.getString(iRating) + "###" + c.getString(iDate)
-					+ "\n";
+		// for (c.moveToFirst(); !c.isAfterLast() && !c.isBeforeFirst(); c
+		// .moveToNext()) {
+		// I think this way of iterating through the cursor is more simple, or
+		// was there another reason why you used the for loop? I kept the old
+		// way above just incase
+		while (c.moveToNext()) {
+			result.append("Row ID: " + c.getString(iRow) + ", Task Name: "
+					+ c.getString(iName) + ", Task Rating: "
+					+ c.getString(iRating) + ", Task Date: "
+					+ c.getString(iDate) + "\n");
 		}
-		Log.d(TAG, result);
+		Log.d(TAG, result.toString());
 
-		return result;
+		return result.toString();
 	}
 
 	/**
@@ -196,8 +197,7 @@ public class ToDoDatabase {
 		iRating = c.getColumnIndex(KEY_RATING);
 		iDate = c.getColumnIndex(KEY_DATE);
 		// move cursor to first and then traverse through the database
-		for (c.moveToFirst(); !c.isAfterLast() && !c.isBeforeFirst(); c
-				.moveToNext()) {
+		while (c.moveToNext()) {
 			name = c.getString(iName);
 			time = c.getString(iDate);
 			importance = c.getString(iRating);
@@ -205,7 +205,7 @@ public class ToDoDatabase {
 			gotTask.setImportance(importance);
 			taskList.add(gotTask);
 		}
-		Log.d(TAG," THIS MANY TASKS IN YOUR DB: " + taskList.size());
+		Log.d(TAG, " THIS MANY TASKS IN YOUR DB: " + taskList.size());
 		close();
 		return taskList;
 	}
