@@ -196,7 +196,8 @@ public class ToDoDatabase {
 		iRating = c.getColumnIndex(KEY_RATING);
 		iDate = c.getColumnIndex(KEY_DATE);
 		// move cursor to first and then traverse through the database
-		for (c.moveToFirst(); c.moveToNext();) {
+		for (c.moveToFirst(); !c.isAfterLast() && !c.isBeforeFirst(); c
+				.moveToNext()) {
 			name = c.getString(iName);
 			time = c.getString(iDate);
 			importance = c.getString(iRating);
