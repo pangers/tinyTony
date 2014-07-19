@@ -204,6 +204,7 @@ public class ToDoDatabase {
 			gotTask.setImportance(importance);
 			taskList.add(gotTask);
 		}
+		Log.d(TAG," THIS MANY TASKS IN YOUR DB: " + taskList.size());
 		close();
 		return taskList;
 	}
