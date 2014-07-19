@@ -127,7 +127,6 @@ public class TaskListFragment extends Fragment implements
 
 	public void setDataBase(ToDoDatabase database2) {
 		database = database2;
-
 	}
 
 }
