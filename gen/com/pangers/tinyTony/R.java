@@ -26,30 +26,34 @@ public final class R {
         public static final int whitebackground=0x7f020006;
     }
     public static final class id {
-        public static final int StatGraph=0x7f090007;
-        public static final int StatList=0x7f090008;
-        public static final int StatPageTitle=0x7f090006;
-        public static final int about=0x7f09000f;
-        public static final int add=0x7f09000d;
-        public static final int contentframe=0x7f090001;
-        public static final int drawerlayout=0x7f090000;
-        public static final int drawerlist=0x7f090002;
-        public static final int newtask=0x7f090003;
-        public static final int settings=0x7f09000e;
-        public static final int statMainScreen=0x7f090005;
-        public static final int tasklist=0x7f09000a;
-        public static final int taskname=0x7f09000b;
-        public static final int testtitle=0x7f090009;
-        public static final int timeleft=0x7f09000c;
-        public static final int timeremaining=0x7f090004;
+        public static final int StatGraph=0x7f09000a;
+        public static final int StatList=0x7f09000b;
+        public static final int StatPageTitle=0x7f090009;
+        public static final int about=0x7f090012;
+        public static final int add=0x7f090010;
+        public static final int contentframe=0x7f090004;
+        public static final int detailedImportance=0x7f090001;
+        public static final int detailedName=0x7f090000;
+        public static final int detailedTime=0x7f090002;
+        public static final int drawerlayout=0x7f090003;
+        public static final int drawerlist=0x7f090005;
+        public static final int newtask=0x7f090006;
+        public static final int settings=0x7f090011;
+        public static final int statMainScreen=0x7f090008;
+        public static final int tasklist=0x7f09000d;
+        public static final int taskname=0x7f09000e;
+        public static final int testtitle=0x7f09000c;
+        public static final int timeleft=0x7f09000f;
+        public static final int timeremaining=0x7f090007;
     }
     public static final class layout {
-        public static final int drawer_row=0x7f030000;
-        public static final int main=0x7f030001;
-        public static final int newtaskdialog=0x7f030002;
-        public static final int stats=0x7f030003;
-        public static final int taskfragment=0x7f030004;
-        public static final int tasklistitem=0x7f030005;
+        public static final int detailedtask=0x7f030000;
+        public static final int drawer_row=0x7f030001;
+        public static final int main=0x7f030002;
+        public static final int newtaskdialog=0x7f030003;
+        public static final int stats=0x7f030004;
+        public static final int taskfragment=0x7f030005;
+        public static final int tasklistitem=0x7f030006;
     }
     public static final class menu {
         public static final int addtaskactions=0x7f080000;

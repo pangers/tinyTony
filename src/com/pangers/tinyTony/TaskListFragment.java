@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.pangers.DataService.ToDoDatabase;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -90,7 +91,10 @@ public class TaskListFragment extends Fragment implements
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-
+		Intent detailedTaskIntent = new Intent(view.getContext(),
+				DetailedTask.class);
+		detailedTaskIntent.putExtra("pos", position);
+		startActivity(detailedTaskIntent);
 	}
 
 	public void showNewTaskDialog() {
