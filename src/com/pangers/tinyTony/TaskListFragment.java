@@ -26,7 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class TaskListFragment extends Fragment implements
-		AdapterView.OnItemClickListener, NewTaskFragment.newTaskDialogListener {
+		NewTaskFragment.newTaskDialogListener {
 
 	private TextView titleView;
 	private ListView taskList;
@@ -62,6 +62,8 @@ public class TaskListFragment extends Fragment implements
 		adapter = new TaskListAdapter(getActivity(), tasks);
 		// Create the ListView
 		taskList.setAdapter(adapter);
+		// Sets onClick listener
+		onClickSetup();
 	}
 
 	private void generateData(String newtask, String timeremaining) {
@@ -88,13 +90,17 @@ public class TaskListFragment extends Fragment implements
 		}
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		Intent detailedTaskIntent = new Intent(view.getContext(),
-				DetailedTask.class);
-		detailedTaskIntent.putExtra("pos", position);
-		startActivity(detailedTaskIntent);
+	private void onClickSetup() {
+		taskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent detailedTaskIntent = new Intent(parent.getContext(),
+						DetailedTask.class);
+				detailedTaskIntent.putExtra("position", position);
+				startActivity(detailedTaskIntent);
+			}
+		});
 	}
 
 	public void showNewTaskDialog() {
