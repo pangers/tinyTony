@@ -28,47 +28,55 @@
         android:hint="@string/timeremaining"
         android:inputType="number" />
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
         android:orientation="horizontal" >
-
-        <RadioGroup
-            android:id="@+id/newTaskDailogRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/newTaskDialogRadio0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/importance1" />
-
-            <RadioButton
-                android:id="@+id/newTaskDialogRadio1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/importance2" />
-
-            <RadioButton
-                android:id="@+id/newTaskDialogRadio2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/importance3" />
-        </RadioGroup>
 
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/importanceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="@string/importance"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RadioGroup
+        android:id="@+id/newTaskDailogRadioGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/newTaskDialogRadio0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/importance1" />
+
+        <RadioButton
+            android:id="@+id/newTaskDialogRadio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/importance2" />
+
+        <RadioButton
+            android:id="@+id/newTaskDialogRadio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/importance3" />
+    </RadioGroup>
 
 </LinearLayout>
