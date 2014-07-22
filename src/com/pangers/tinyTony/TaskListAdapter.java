@@ -2,12 +2,8 @@ package com.pangers.tinyTony;
 
 import java.util.ArrayList;
 
-import com.pangers.DataService.ToDoDatabase;
-
 import android.content.Context;
-import android.graphics.Color;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +48,17 @@ public class TaskListAdapter extends ArrayAdapter<TaskData> {
 		taskview.setText(taskData.get(position).getTask());
 
 		// Set border colour (background)
-		// blue colour
-		rowView.setBackgroundColor(0xFF0080ff);
+		switch (taskData.get(position).getImportance()) {
+		case "0":
+			// blue
+			rowView.setBackgroundColor(0x0000BBAA);
+		case "1":
+			// yellow
+			rowView.setBackgroundColor(0xFFFF00aa);
+		case "2":
+			// red
+			rowView.setBackgroundColor(0xFF0000ff);
+		}
 
 		// Count Down Timer
 		timeDifference = Long.valueOf(taskData.get(position).getTime())

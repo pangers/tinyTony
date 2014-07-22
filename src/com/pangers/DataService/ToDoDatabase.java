@@ -166,8 +166,7 @@ public class ToDoDatabase {
 		name = c.getString(iName);
 		time = c.getString(iDate);
 		importance = c.getString(iRating);
-		gotTask = new TaskData(name, time);
-		gotTask.setImportance(importance);
+		gotTask = new TaskData(name, time, importance);
 		close();
 		return gotTask;
 	}
@@ -201,8 +200,7 @@ public class ToDoDatabase {
 			name = c.getString(iName);
 			time = c.getString(iDate);
 			importance = c.getString(iRating);
-			gotTask = new TaskData(name, time);
-			gotTask.setImportance(importance);
+			gotTask = new TaskData(name, time, importance);
 			taskList.add(gotTask);
 		}
 		Log.d(TAG, " THIS MANY TASKS IN YOUR DB: " + taskList.size());

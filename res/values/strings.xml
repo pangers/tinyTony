@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">tinyTony</string>
     <string name="testTitle">tinyTony Title</string>
     <string name="about">About</string>
@@ -12,13 +13,19 @@
     <string name="dialogtitle">New Task</string>
     <string name="cancel">Cancel</string>
     <string name="hello_world">hello world!</string>
+
     <string-array name="drawermenu">
         <item>Tasks</item>
         <item>Stats</item>
         <item>Contacts</item>
         <item>Settings</item>
     </string-array>
+
     <string name="draweropen">Open navigation drawer</string>
     <string name="drawerclose">Close navigation drawer</string>
-	<string name="stat_title">Stats</string>
+    <string name="stat_title">Stats</string>
+    <string name="importance1">!</string>
+    <string name="importance2">!!</string>
+    <string name="importance3">!!!</string>
+
 </resources>

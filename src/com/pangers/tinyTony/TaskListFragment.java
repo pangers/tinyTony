@@ -2,6 +2,7 @@ package com.pangers.tinyTony;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.pangers.DataService.ToDoDatabase;
 
@@ -21,9 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 public class TaskListFragment extends Fragment implements
 		NewTaskFragment.newTaskDialogListener {
@@ -66,8 +70,9 @@ public class TaskListFragment extends Fragment implements
 		onClickSetup();
 	}
 
-	private void generateData(String newtask, String timeremaining) {
-		TaskData task = new TaskData(newtask, timeremaining);
+	private void generateData(String newtask, String timeremaining,
+			String importance) {
+		TaskData task = new TaskData(newtask, timeremaining, importance);
 		tasks.add(task);
 		database.insertNewTask(task);
 		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
@@ -115,14 +120,36 @@ public class TaskListFragment extends Fragment implements
 				.findViewById(R.id.newtask);
 		EditText timeremaining = (EditText) dialog.getDialog().findViewById(
 				R.id.timeremaining);
+		DatePicker datePicker = (DatePicker) dialog.getDialog().findViewById(
+				R.id.datePicker);
+		TimePicker timePicker = (TimePicker) dialog.getDialog().findViewById(
+				(R.id.timePicker));
+		RadioGroup radioGroup = (RadioGroup) dialog.getDialog().findViewById(
+				R.id.newTaskDailogRadioGroup);
+		String importance = "0";
 
-		String taskString = task.getText().toString();
-		String timeremainingString = String.valueOf(Integer
-				.parseInt(timeremaining.getText().toString())
-				* msInAMinute
-				+ System.currentTimeMillis());
+		// Initialize calendar and then set it according to time and date
+		// pickers
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(datePicker.getYear(), datePicker.getMonth(),
+				datePicker.getDayOfMonth(), timePicker.getCurrentHour(),
+				timePicker.getCurrentHour());
 
-		generateData(taskString, timeremainingString);
+		// Check radio buttons
+		switch (radioGroup.getCheckedRadioButtonId()) {
+		case R.id.newTaskDialogRadio0:
+			importance = "0";
+			break;
+		case R.id.newTaskDialogRadio1:
+			importance = "1";
+			break;
+		case R.id.newTaskDialobRadio2:
+			importance = "2";
+			break;
+		}
+		generateData(task.getText().toString(),
+				String.valueOf(calendar.getTimeInMillis()), importance);
+
 	}
 
 	@Override
