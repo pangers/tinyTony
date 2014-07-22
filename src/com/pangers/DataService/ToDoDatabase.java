@@ -96,7 +96,7 @@ public class ToDoDatabase {
 		open();
 		boolean addSuccess = false;
 		String name = task.getTask();
-		String importance = "neutral";
+		String importance = task.getImportance();
 		String time = task.getTime();
 		createEntry(name, importance, time);
 		getData();

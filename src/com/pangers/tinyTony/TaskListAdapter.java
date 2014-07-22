@@ -3,7 +3,9 @@ package com.pangers.tinyTony;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,12 @@ public class TaskListAdapter extends ArrayAdapter<TaskData> {
 
 	private final Context context;
 	private final ArrayList<TaskData> taskData;
-	private long timeDifference, minutes, seconds;;
+	private long timeDifference, hours, minutes, seconds;;
 	private int refreshInterval = 1000;
-	private int msInAMinute = 60000;
 	private int msInASecond = 1000;
+	private int msInAMinute = msInASecond * 60;
+	private int msInAnHour = msInAMinute * 60;
+
 	private CountDownTimer countDown;
 
 	public TaskListAdapter(Context context, ArrayList<TaskData> taskData) {
@@ -50,14 +54,14 @@ public class TaskListAdapter extends ArrayAdapter<TaskData> {
 		// Set border colour (background)
 		switch (taskData.get(position).getImportance()) {
 		case "0":
-			// blue
-			rowView.setBackgroundColor(0x0000BBAA);
+			rowView.setBackgroundResource(R.color.blue);
+			break;
 		case "1":
-			// yellow
-			rowView.setBackgroundColor(0xFFFF00aa);
+			rowView.setBackgroundResource(R.color.yellow);
+			break;
 		case "2":
-			// red
-			rowView.setBackgroundColor(0xFF0000ff);
+			rowView.setBackgroundResource(R.color.red);
+			break;
 		}
 
 		// Count Down Timer
@@ -65,9 +69,11 @@ public class TaskListAdapter extends ArrayAdapter<TaskData> {
 				- System.currentTimeMillis();
 		countDown = new CountDownTimer(timeDifference, refreshInterval) {
 			public void onTick(long millisUntilFinished) {
-				minutes = millisUntilFinished / msInAMinute;
+				hours = millisUntilFinished / msInAnHour;
+				minutes = (millisUntilFinished / msInAMinute) % 60;
 				seconds = (millisUntilFinished / msInASecond) % 60;
-				timeview.setText(String.valueOf(minutes) + ":"
+				timeview.setText(String.valueOf(hours) + ":"
+						+ String.valueOf(minutes) + ":"
 						+ String.valueOf(seconds));
 			}
 

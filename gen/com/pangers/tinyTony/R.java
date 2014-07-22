@@ -14,7 +14,10 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int black=0x7f040003;
         public static final int blue=0x7f040000;
+        public static final int red=0x7f040002;
+        public static final int yellow=0x7f040001;
     }
     public static final class drawable {
         public static final int drawer_shadow=0x7f020000;
@@ -39,9 +42,9 @@ public final class R {
         public static final int drawerlayout=0x7f090003;
         public static final int drawerlist=0x7f090005;
         public static final int newTaskDailogRadioGroup=0x7f090009;
-        public static final int newTaskDialobRadio2=0x7f09000c;
         public static final int newTaskDialogRadio0=0x7f09000a;
         public static final int newTaskDialogRadio1=0x7f09000b;
+        public static final int newTaskDialogRadio2=0x7f09000c;
         public static final int newtask=0x7f090006;
         public static final int settings=0x7f090017;
         public static final int statMainScreen=0x7f09000e;

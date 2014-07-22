@@ -59,7 +59,7 @@
                 android:text="@string/importance2" />
 
             <RadioButton
-                android:id="@+id/newTaskDialobRadio2"
+                android:id="@+id/newTaskDialogRadio2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/importance3" />

@@ -143,7 +143,7 @@ public class TaskListFragment extends Fragment implements
 		case R.id.newTaskDialogRadio1:
 			importance = "1";
 			break;
-		case R.id.newTaskDialobRadio2:
+		case R.id.newTaskDialogRadio2:
 			importance = "2";
 			break;
 		}
