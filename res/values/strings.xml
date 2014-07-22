@@ -27,5 +27,6 @@
     <string name="importance1">!</string>
     <string name="importance2">!!</string>
     <string name="importance3">!!!</string>
+    <string name="importance">Importance</string>
 
 </resources>
