@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.TabHost;
 
 public class NewTaskFragment extends DialogFragment {
 
@@ -55,7 +56,6 @@ public class NewTaskFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		// Get the layout inflater
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-
 		// Inflate layout for dialog
 		builder.setView(inflater.inflate(R.layout.newtaskdialog, null))
 				.setTitle(R.string.dialogtitle)
@@ -79,7 +79,6 @@ public class NewTaskFragment extends DialogFragment {
 										.onDialogNegativeClick(NewTaskFragment.this);
 							}
 						});
-
 		dialog = builder.create();
 		return dialog;
 	}
@@ -89,6 +88,7 @@ public class NewTaskFragment extends DialogFragment {
 		super.onStart();
 		task = (EditText) getDialog().findViewById(R.id.newtask);
 		timeremaining = (EditText) getDialog().findViewById(R.id.timeremaining);
+
 		if (editTextTaskFlag == 0 || editTextTimeFlag == 0) {
 			dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
 		}
@@ -102,7 +102,7 @@ public class NewTaskFragment extends DialogFragment {
 
 	@Override
 	public void onResume() {
-		super.onResume();		
+		super.onResume();
 		watchTaskEditText(task);
 		watchTimeEditText(timeremaining);
 	}

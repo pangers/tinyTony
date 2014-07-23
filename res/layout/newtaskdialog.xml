@@ -5,17 +5,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/newtask"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="16dp"
-        android:hint="@string/newtask"
-        android:imeOptions="actionDone"
-        android:inputType="textMultiLine" />
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/newtask"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="@string/newtask"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine" />
+
+        <RadioGroup
+            android:id="@+id/newTaskDailogRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/newTaskDialogRadio0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/importance1" />
+
+            <RadioButton
+                android:id="@+id/newTaskDialogRadio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/importance2" />
+
+            <RadioButton
+                android:id="@+id/newTaskDialogRadio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/importance3" />
+        </RadioGroup>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/timeremaining"
@@ -28,54 +61,15 @@
         android:hint="@string/timeremaining"
         android:inputType="number" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal" >
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <TimePicker
-            android:id="@+id/timePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/importanceTextView"
+    <DatePicker
+        android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/importance"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <RadioGroup
-        android:id="@+id/newTaskDailogRadioGroup"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/newTaskDialogRadio0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/importance1" />
-
-        <RadioButton
-            android:id="@+id/newTaskDialogRadio1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/importance2" />
-
-        <RadioButton
-            android:id="@+id/newTaskDialogRadio2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/importance3" />
-    </RadioGroup>
+        android:calendarViewShown="false" />
 
 </LinearLayout>
