@@ -133,7 +133,7 @@ public class TaskListFragment extends Fragment implements
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(datePicker.getYear(), datePicker.getMonth(),
 				datePicker.getDayOfMonth(), timePicker.getCurrentHour(),
-				timePicker.getCurrentHour());
+				timePicker.getCurrentMinute());
 
 		// Check radio buttons
 		switch (radioGroup.getCheckedRadioButtonId()) {
