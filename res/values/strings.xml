@@ -9,7 +9,6 @@
     <string name="timeleft">2:39</string>
     <string name="add">Add</string>
     <string name="newtask">Enter a new task</string>
-    <string name="timeremaining">Enter time remaining (in minutes)</string>
     <string name="dialogtitle">New Task</string>
     <string name="cancel">Cancel</string>
     <string name="hello_world">hello world!</string>
@@ -28,5 +27,8 @@
     <string name="importance2">!!</string>
     <string name="importance3">!!!</string>
     <string name="importance">Importance</string>
+    <string name="taskdate">Task Date</string>
+    <string name="primaryobjectives">Primary Objectives</string>
+    <string name="timeremaining">Time Remaining</string>
 
 </resources>

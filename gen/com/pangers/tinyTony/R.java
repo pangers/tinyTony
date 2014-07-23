@@ -14,10 +14,14 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int black=0x7f040003;
+        public static final int black=0x7f040006;
         public static final int blue=0x7f040000;
-        public static final int red=0x7f040002;
-        public static final int yellow=0x7f040001;
+        public static final int lightblue=0x7f040001;
+        public static final int lightred=0x7f040005;
+        public static final int lightyellow=0x7f040003;
+        public static final int red=0x7f040004;
+        public static final int white=0x7f040007;
+        public static final int yellow=0x7f040002;
     }
     public static final class drawable {
         public static final int drawer_shadow=0x7f020000;
@@ -26,34 +30,38 @@ public final class R {
         public static final int ic_menu_btn_add=0x7f020003;
         public static final int ic_menu_emoticons=0x7f020004;
         public static final int ic_menu_settings_holo_light=0x7f020005;
-        public static final int whitebackground=0x7f020006;
     }
     public static final class id {
-        public static final int StatGraph=0x7f090010;
-        public static final int StatList=0x7f090011;
-        public static final int StatPageTitle=0x7f09000f;
-        public static final int about=0x7f090018;
-        public static final int add=0x7f090016;
-        public static final int contentframe=0x7f090004;
-        public static final int datePicker=0x7f09000d;
-        public static final int detailedImportance=0x7f090002;
-        public static final int detailedName=0x7f090000;
-        public static final int detailedTime=0x7f090001;
-        public static final int drawerlayout=0x7f090003;
-        public static final int drawerlist=0x7f090005;
-        public static final int newTaskDailogRadioGroup=0x7f090007;
-        public static final int newTaskDialogRadio0=0x7f090008;
-        public static final int newTaskDialogRadio1=0x7f090009;
-        public static final int newTaskDialogRadio2=0x7f09000a;
-        public static final int newtask=0x7f090006;
-        public static final int settings=0x7f090017;
-        public static final int statMainScreen=0x7f09000e;
-        public static final int tasklist=0x7f090013;
-        public static final int taskname=0x7f090014;
-        public static final int testtitle=0x7f090012;
-        public static final int timePicker=0x7f09000c;
-        public static final int timeleft=0x7f090015;
-        public static final int timeremaining=0x7f09000b;
+        public static final int StatGraph=0x7f090015;
+        public static final int StatList=0x7f090016;
+        public static final int StatPageTitle=0x7f090014;
+        public static final int about=0x7f09001d;
+        public static final int add=0x7f09001b;
+        public static final int contentframe=0x7f090009;
+        public static final int datePicker=0x7f090012;
+        public static final int detailedDetails=0x7f090003;
+        public static final int detailedElement=0x7f090000;
+        public static final int detailedInnerDetails=0x7f090004;
+        public static final int detailedLongTimeRemaining=0x7f090007;
+        public static final int detailedName=0x7f090001;
+        public static final int detailedPrimaryObjectives=0x7f090006;
+        public static final int detailedTaskDate=0x7f090005;
+        public static final int detailedTimeRemaining=0x7f090002;
+        public static final int drawerlayout=0x7f090008;
+        public static final int drawerlist=0x7f09000a;
+        public static final int newTaskDailogRadioGroup=0x7f09000c;
+        public static final int newTaskDialogRadio0=0x7f09000d;
+        public static final int newTaskDialogRadio1=0x7f09000e;
+        public static final int newTaskDialogRadio2=0x7f09000f;
+        public static final int newtask=0x7f09000b;
+        public static final int settings=0x7f09001c;
+        public static final int statMainScreen=0x7f090013;
+        public static final int tasklist=0x7f090018;
+        public static final int taskname=0x7f090019;
+        public static final int testtitle=0x7f090017;
+        public static final int timePicker=0x7f090011;
+        public static final int timeleft=0x7f09001a;
+        public static final int timeremaining=0x7f090010;
     }
     public static final class layout {
         public static final int detailedtask=0x7f030000;
@@ -72,22 +80,24 @@ public final class R {
         public static final int about=0x7f050002;
         public static final int add=0x7f050006;
         public static final int app_name=0x7f050000;
-        public static final int cancel=0x7f05000a;
-        public static final int dialogtitle=0x7f050009;
-        public static final int drawerclose=0x7f05000d;
-        public static final int draweropen=0x7f05000c;
-        public static final int hello_world=0x7f05000b;
-        public static final int importance=0x7f050012;
-        public static final int importance1=0x7f05000f;
-        public static final int importance2=0x7f050010;
-        public static final int importance3=0x7f050011;
+        public static final int cancel=0x7f050009;
+        public static final int dialogtitle=0x7f050008;
+        public static final int drawerclose=0x7f05000c;
+        public static final int draweropen=0x7f05000b;
+        public static final int hello_world=0x7f05000a;
+        public static final int importance=0x7f050011;
+        public static final int importance1=0x7f05000e;
+        public static final int importance2=0x7f05000f;
+        public static final int importance3=0x7f050010;
         public static final int newtask=0x7f050007;
+        public static final int primaryobjectives=0x7f050013;
         public static final int settings=0x7f050003;
-        public static final int stat_title=0x7f05000e;
+        public static final int stat_title=0x7f05000d;
+        public static final int taskdate=0x7f050012;
         public static final int taskname=0x7f050004;
         public static final int testTitle=0x7f050001;
         public static final int timeleft=0x7f050005;
-        public static final int timeremaining=0x7f050008;
+        public static final int timeremaining=0x7f050014;
     }
     public static final class style {
         /** 

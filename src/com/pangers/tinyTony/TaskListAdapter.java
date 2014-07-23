@@ -16,11 +16,12 @@ public class TaskListAdapter extends ArrayAdapter<TaskData> {
 
 	private final Context context;
 	private final ArrayList<TaskData> taskData;
-	private long timeDifference, hours, minutes, seconds;;
+	private long timeDifference, hours, minutes, seconds, days;
 	private int refreshInterval = 1000;
 	private int msInASecond = 1000;
 	private int msInAMinute = msInASecond * 60;
 	private int msInAnHour = msInAMinute * 60;
+	private int msInADay = msInAnHour * 24;
 
 	private CountDownTimer countDown;
 
@@ -69,12 +70,15 @@ public class TaskListAdapter extends ArrayAdapter<TaskData> {
 				- System.currentTimeMillis();
 		countDown = new CountDownTimer(timeDifference, refreshInterval) {
 			public void onTick(long millisUntilFinished) {
-				hours = millisUntilFinished / msInAnHour;
+				days = millisUntilFinished / msInADay;
+				hours = (millisUntilFinished / msInAnHour) % 24;
 				minutes = (millisUntilFinished / msInAMinute) % 60;
 				seconds = (millisUntilFinished / msInASecond) % 60;
-				timeview.setText(String.valueOf(hours) + ":"
-						+ String.valueOf(minutes) + ":"
-						+ String.valueOf(seconds));
+				if (days < 1) {
+					timeview.setText(hours + ":" + minutes + ":" + seconds);
+				} else {
+					timeview.setText(days + " days");
+				}
 			}
 
 			public void onFinish() {
