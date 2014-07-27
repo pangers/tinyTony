@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -115,6 +116,11 @@ public class DetailedTask extends Activity {
 
 	}
 	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.detailedtaskactions, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
@@ -122,9 +128,14 @@ public class DetailedTask extends Activity {
 		case android.R.id.home:
 			finish();
 			return true;
+		case R.id.deletedetailedtask:
+			database.deleteNewTask(database.getTask(position));
+			finish();
+			return true;
 
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	
 }

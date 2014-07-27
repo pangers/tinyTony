@@ -1,0 +1,4 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/contextualdelete" android:title="@string/delete" android:icon="@drawable/ic_menu_delete"></item>
+    </menu>

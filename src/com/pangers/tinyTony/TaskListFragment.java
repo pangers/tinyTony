@@ -15,6 +15,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,6 +34,7 @@ import android.widget.TimePicker;
 public class TaskListFragment extends Fragment implements
 		NewTaskFragment.newTaskDialogListener {
 
+	final static String TAG = "TaskListFragment";
 	private TextView titleView;
 	private ListView taskList;
 	private TaskListAdapter adapter;
@@ -41,6 +44,7 @@ public class TaskListFragment extends Fragment implements
 	private int editTextTaskFlag = 0;
 	private int editTextTimeFlag = 0;
 	ArrayList<TaskData> tasks = new ArrayList<TaskData>();
+	private ActionMode mActionMode;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,14 +64,23 @@ public class TaskListFragment extends Fragment implements
 		// Find views
 		titleView = (TextView) getActivity().findViewById(R.id.testtitle);
 		taskList = (ListView) getActivity().findViewById(R.id.tasklist);
+	}
+
+	public void onResume() {
+		super.onResume();
+		updateListView();
+		// Sets onClick listener
+		onClickSetup();
+		onLongClickSetup();
+	}
+
+	public void updateListView() {
 		// Gets tasks from database in form of array
 		tasks = database.getTaskList();
 		// Adapter to create task list
 		adapter = new TaskListAdapter(getActivity(), tasks);
 		// Create the ListView
 		taskList.setAdapter(adapter);
-		// Sets onClick listener
-		onClickSetup();
 	}
 
 	private void generateData(String newtask, String timeremaining,
@@ -75,7 +88,8 @@ public class TaskListFragment extends Fragment implements
 		TaskData task = new TaskData(newtask, timeremaining, importance);
 		tasks.add(task);
 		database.insertNewTask(task);
-		((TaskListAdapter) taskList.getAdapter()).notifyDataSetChanged();
+		adapter = new TaskListAdapter(getActivity(), tasks);
+		taskList.setAdapter(adapter);
 	}
 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -108,6 +122,26 @@ public class TaskListFragment extends Fragment implements
 		});
 	}
 
+	private void onLongClickSetup() {
+		taskList.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (mActionMode != null) {
+					return false;
+				}
+
+				// start contextual action bar
+				mActionMode = getActivity().startActionMode(
+						new ActionModeCallback(position));
+				view.setSelected(true);
+				return true;
+			}
+
+		});
+	}
+
 	public void showNewTaskDialog() {
 		NewTaskFragment dialog = new NewTaskFragment();
 		dialog.setTargetFragment(this, 0);
@@ -118,8 +152,8 @@ public class TaskListFragment extends Fragment implements
 	public void onDialogPositiveClick(DialogFragment dialog) {
 		EditText task = (EditText) dialog.getDialog()
 				.findViewById(R.id.newtask);
-//		EditText timeremaining = (EditText) dialog.getDialog().findViewById(
-//				R.id.timeremaining);
+		// EditText timeremaining = (EditText) dialog.getDialog().findViewById(
+		// R.id.timeremaining);
 		DatePicker datePicker = (DatePicker) dialog.getDialog().findViewById(
 				R.id.datePicker);
 		TimePicker timePicker = (TimePicker) dialog.getDialog().findViewById(
@@ -159,6 +193,48 @@ public class TaskListFragment extends Fragment implements
 
 	public void setDataBase(ToDoDatabase database2) {
 		database = database2;
+	}
+
+	private class ActionModeCallback implements ActionMode.Callback {
+
+		private int position;
+
+		ActionModeCallback(int position) {
+			this.position = position;
+		}
+
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+			MenuInflater inflater = mode.getMenuInflater();
+			inflater.inflate(R.menu.contextualactionbar, menu);
+			return true;
+		}
+
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+			// return false if nothing is done
+			return false;
+		}
+
+		@Override
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			switch (item.getItemId()) {
+			case R.id.contextualdelete:
+				database.deleteNewTask(database.getTask(position));
+				updateListView();
+				//close contextual action bar
+				mode.finish();
+				return true;
+			default:
+				return false;
+			}
+		}
+
+		@Override
+		public void onDestroyActionMode(ActionMode mode) {
+			mActionMode = null;
+		}
+
 	}
 
 }

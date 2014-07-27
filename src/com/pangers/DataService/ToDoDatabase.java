@@ -85,6 +85,14 @@ public class ToDoDatabase {
 		return ourDataBase.insert(DATA_TABLE, null, cv);
 	}
 
+	private void deleteEntry(String name, String importance, String date) {
+		String whereClause = KEY_NAME + " = ? AND " + KEY_RATING + " = ? AND "
+				+ KEY_DATE + " = ?";
+		String[] whereArgs = { name, importance, date };
+		ourDataBase.delete(DATA_TABLE, whereClause, whereArgs);
+
+	}
+
 	/**
 	 * Insert a new task to the data base
 	 * 
@@ -103,6 +111,17 @@ public class ToDoDatabase {
 		getTaskList();
 		close();
 		return addSuccess;
+	}
+
+	public void deleteNewTask(TaskData task) {
+		open();
+		String name = task.getTask();
+		String importance = task.getImportance();
+		String time = task.getTime();
+		deleteEntry(name, importance, time);
+		getData();
+		getTaskList();
+		close();
 	}
 
 	public String getData() {
@@ -206,5 +225,9 @@ public class ToDoDatabase {
 		Log.d(TAG, " THIS MANY TASKS IN YOUR DB: " + taskList.size());
 		close();
 		return taskList;
+	}
+
+	public void deleteTask() {
+
 	}
 }

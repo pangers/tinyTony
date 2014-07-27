@@ -30,5 +30,6 @@
     <string name="taskdate">Task Date</string>
     <string name="primaryobjectives">Primary Objectives</string>
     <string name="timeremaining">Time Remaining</string>
+    <string name="delete">Delete</string>
 
 </resources>
