@@ -118,8 +118,8 @@ public class TaskListFragment extends Fragment implements
 	public void onDialogPositiveClick(DialogFragment dialog) {
 		EditText task = (EditText) dialog.getDialog()
 				.findViewById(R.id.newtask);
-		EditText timeremaining = (EditText) dialog.getDialog().findViewById(
-				R.id.timeremaining);
+//		EditText timeremaining = (EditText) dialog.getDialog().findViewById(
+//				R.id.timeremaining);
 		DatePicker datePicker = (DatePicker) dialog.getDialog().findViewById(
 				R.id.datePicker);
 		TimePicker timePicker = (TimePicker) dialog.getDialog().findViewById(

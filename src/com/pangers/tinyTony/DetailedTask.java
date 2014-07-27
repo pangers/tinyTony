@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,6 +31,9 @@ public class DetailedTask extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detailedtask);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayShowTitleEnabled(false);
 
 		name = (TextView) findViewById(R.id.detailedName);
 		time = (TextView) findViewById(R.id.detailedTimeRemaining);
@@ -109,5 +113,18 @@ public class DetailedTask extends Activity {
 				+ calendar.getTime().getMonth() + "/"
 				+ String.valueOf(calendar.getTime().getYear() + 1900));
 
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }
