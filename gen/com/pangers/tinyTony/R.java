@@ -33,15 +33,15 @@ public final class R {
         public static final int ic_menu_settings_holo_light=0x7f020006;
     }
     public static final class id {
-        public static final int StatGraph=0x7f090015;
-        public static final int StatList=0x7f090016;
-        public static final int StatPageTitle=0x7f090014;
-        public static final int about=0x7f09001f;
-        public static final int add=0x7f09001b;
+        public static final int StatGraph=0x7f090014;
+        public static final int StatList=0x7f090015;
+        public static final int StatPageTitle=0x7f090013;
+        public static final int about=0x7f09001e;
+        public static final int add=0x7f09001a;
         public static final int contentframe=0x7f090009;
-        public static final int contextualdelete=0x7f09001c;
-        public static final int datePicker=0x7f090012;
-        public static final int deletedetailedtask=0x7f09001d;
+        public static final int contextualdelete=0x7f09001b;
+        public static final int datePicker=0x7f090011;
+        public static final int deletedetailedtask=0x7f09001c;
         public static final int detailedDetails=0x7f090003;
         public static final int detailedElement=0x7f090000;
         public static final int detailedInnerDetails=0x7f090004;
@@ -57,14 +57,13 @@ public final class R {
         public static final int newTaskDialogRadio1=0x7f09000e;
         public static final int newTaskDialogRadio2=0x7f09000f;
         public static final int newtask=0x7f09000b;
-        public static final int settings=0x7f09001e;
-        public static final int statMainScreen=0x7f090013;
-        public static final int tasklist=0x7f090018;
-        public static final int taskname=0x7f090019;
-        public static final int testtitle=0x7f090017;
-        public static final int timePicker=0x7f090011;
-        public static final int timeleft=0x7f09001a;
-        public static final int timeremaining=0x7f090010;
+        public static final int settings=0x7f09001d;
+        public static final int statMainScreen=0x7f090012;
+        public static final int tasklist=0x7f090017;
+        public static final int taskname=0x7f090018;
+        public static final int testtitle=0x7f090016;
+        public static final int timePicker=0x7f090010;
+        public static final int timeleft=0x7f090019;
     }
     public static final class layout {
         public static final int detailedtask=0x7f030000;
