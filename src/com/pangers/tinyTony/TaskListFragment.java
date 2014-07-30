@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import com.pangers.DataService.ToDoDatabase;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,13 +40,18 @@ public class TaskListFragment extends Fragment implements
 	private ListView taskList;
 	private TaskListAdapter adapter;
 	private int msInAMinute = 60000;
-	ToDoDatabase database;
+	private ToDoDatabase database;
 	public final static String NAV_DRAWER_POS = "navDrawerPos";
 	private int editTextTaskFlag = 0;
 	private int editTextTimeFlag = 0;
 	ArrayList<TaskData> tasks = new ArrayList<TaskData>();
 	private ActionMode mActionMode;
+	private OnTaskItemSelected taskCallback;
 
+	public interface OnTaskItemSelected {
+		public void onTaskSelected(int position);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -65,6 +71,16 @@ public class TaskListFragment extends Fragment implements
 		titleView = (TextView) getActivity().findViewById(R.id.testtitle);
 		taskList = (ListView) getActivity().findViewById(R.id.tasklist);
 	}
+	
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		
+		try {
+			taskCallback = (OnTaskItemSelected) activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString() + " must implement OnHeadlineSelectedListener");
+		}
+	}
 
 	public void onResume() {
 		super.onResume();
@@ -73,6 +89,7 @@ public class TaskListFragment extends Fragment implements
 		onClickSetup();
 		onLongClickSetup();
 	}
+	
 
 	public void updateListView() {
 		// Gets tasks from database in form of array
@@ -114,10 +131,11 @@ public class TaskListFragment extends Fragment implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent detailedTaskIntent = new Intent(parent.getContext(),
-						DetailedTask.class);
-				detailedTaskIntent.putExtra("position", position);
-				startActivity(detailedTaskIntent);
+//				Intent detailedTaskIntent = new Intent(parent.getContext(),
+//						DetailedTask.class);
+//				detailedTaskIntent.putExtra("position", position);
+//				startActivity(detailedTaskIntent);
+				taskCallback.onTaskSelected(position);
 			}
 		});
 	}

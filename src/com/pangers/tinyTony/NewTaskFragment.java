@@ -24,7 +24,6 @@ public class NewTaskFragment extends DialogFragment {
 
 	public interface newTaskDialogListener {
 		public void onDialogPositiveClick(DialogFragment dialog);
-
 		public void onDialogNegativeClick(DialogFragment dialog);
 	}
 

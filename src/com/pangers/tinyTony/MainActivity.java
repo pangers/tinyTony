@@ -1,6 +1,7 @@
 package com.pangers.tinyTony;
 
 import com.pangers.DataService.ToDoDatabase;
+import com.pangers.tinyTony.TaskListFragment.OnTaskItemSelected;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity implements
-		ListView.OnItemClickListener {
+		ListView.OnItemClickListener, TaskListFragment.OnTaskItemSelected {
 	private String[] drawerMenu;
 	private CharSequence drawerTitle;
 	private CharSequence title;
@@ -28,7 +29,7 @@ public class MainActivity extends FragmentActivity implements
 	private ListView drawerList;
 	private ActionBarDrawerToggle drawerToggle;
 
-	final static String TAG = "navDrawer";
+	private final static String TAG = "MainActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +59,33 @@ public class MainActivity extends FragmentActivity implements
 				R.drawable.ic_drawer, R.string.draweropen, R.string.drawerclose) {
 			// Called when navigation drawer in closed state
 			public void onDrawerClosed(View view) {
+				Log.d(TAG, "nav drawer closed state");
 				getActionBar().setTitle(title);
 				invalidateOptionsMenu(); // goes to onPrepareOptionsMenu()
 			}
 
 			// Called when navigation drawer in open state
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(drawerTitle); 
+				Log.d(TAG, "nav drawer opened state");
+				getActionBar().setTitle(drawerTitle);
 				invalidateOptionsMenu();// goes to onPrepareOptionsMenu()
 			}
 		};
 		drawerLayout.setDrawerListener(drawerToggle);
-
+		Log.d(TAG, "onCreate()");
+		// if its first time opening app
 		if (savedInstanceState == null) {
+			Log.d(TAG, "onCreate() first time");
 			selectItem(0);
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume()");
+		// drawerToggle.setDrawerIndicatorEnabled(true);
+
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,8 +97,19 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
-		if (getSupportFragmentManager().findFragmentByTag("newTaskList") != null) {
-			menu.findItem(R.id.add).setVisible(!drawerOpen);
+		// if (getSupportFragmentManager().findFragmentByTag("TaskList") !=
+		// null) {
+		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			if (getSupportFragmentManager().getBackStackEntryAt(
+					getSupportFragmentManager().getBackStackEntryCount() - 1)
+					.getName() == "TaskList") {
+				Log.d(TAG, "made it in here!");
+				menu.findItem(R.id.add).setVisible(!drawerOpen);
+			} else if (getSupportFragmentManager().getBackStackEntryAt(
+					getSupportFragmentManager().getBackStackEntryCount() - 1)
+					.getName() == "DETAILTASK") {
+				menu.findItem(R.id.deletedetailedtask).setVisible(!drawerOpen);
+			}
 		}
 		menu.findItem(R.id.settings).setVisible(!drawerOpen);
 		menu.findItem(R.id.about).setVisible(!drawerOpen);
@@ -121,6 +145,7 @@ public class MainActivity extends FragmentActivity implements
 	public void selectItem(int position) {
 		switch (position) {
 		case 0:
+			Log.d(TAG, "onItemClick nav drawer case 0");
 			if (getSupportFragmentManager().findFragmentByTag("newTaskList") == null) {
 				// Pass selection position to next fragment
 				Fragment fragment = new TaskListFragment();
@@ -128,16 +153,49 @@ public class MainActivity extends FragmentActivity implements
 				Bundle args = new Bundle();
 				args.putInt(TaskListFragment.NAV_DRAWER_POS, position);
 				fragment.setArguments(args);
-				// Inflate next fragment by replace
+				// Inflate next fragment by add
 				getSupportFragmentManager().beginTransaction()
-						.replace(R.id.contentframe, fragment, "newTaskList")
-						.commit();
+						.replace(R.id.contentframe, fragment, "TaskList")
+						.addToBackStack("TaskList").commit();
 				// Update selected position in navigation drawer
 				drawerList.setItemChecked(position, true);
 				getActionBar().setTitle(drawerMenu[position]);
 			}
 			drawerLayout.closeDrawer(drawerList);
 			break;
+		}
+	}
+
+	@Override
+	public void onTaskSelected(int position) {
+		Log.d(TAG, "onTaskSelected()");
+		DetailedTask detailTaskFrag = (DetailedTask) getSupportFragmentManager()
+				.findFragmentById(R.id.detailframe);
+		// if we are in a two pane layout and first time showing detail task
+		if ((detailTaskFrag != null)
+				&& (getSupportFragmentManager().findFragmentByTag("DETAILTASK") == null)) {
+			Log.d(TAG, "onTaskSelected() two pane and first time");
+
+			DetailedTask detTask = new DetailedTask();
+			Bundle args = new Bundle();
+			args.putInt("POSITION", position);
+			detTask.setArguments(args);
+			detTask.setDataBase(database);
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.detailframe, detTask, "DETAILTASK")
+					.addToBackStack("DETAILTASK").commit();
+			// we are in one pane layout
+		} else {
+			Log.d(TAG, "onTaskSelected() one pane");
+			DetailedTask detTask = new DetailedTask();
+			Bundle args = new Bundle();
+			args.putInt("POSITION", position);
+			detTask.setArguments(args);
+			detTask.setDataBase(database);
+			// drawerToggle.setDrawerIndicatorEnabled(false);
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.contentframe, detTask, "DETAILTASK")
+					.addToBackStack("DETAILTASK").commit();
 		}
 	}
 
@@ -158,4 +216,12 @@ public class MainActivity extends FragmentActivity implements
 
 	}
 
+	@Override
+	public void onBackPressed() {
+		if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+			this.finish();
+		}
+		super.onBackPressed();
+		
+	}
 }
