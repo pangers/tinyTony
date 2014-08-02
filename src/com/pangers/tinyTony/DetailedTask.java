@@ -138,11 +138,13 @@ public class DetailedTask extends Fragment {
 
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			getActivity().getSupportFragmentManager().popBackStack();
+			getActivity().onBackPressed();
+//			getActivity().getSupportFragmentManager().popBackStack();
 			return true;
 		case R.id.deletedetailedtask:
 			database.deleteNewTask(database.getTask(position));
-			getActivity().getSupportFragmentManager().popBackStack();
+			getActivity().onBackPressed();
+			//getActivity().getSupportFragmentManager().popBackStack();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

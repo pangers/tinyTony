@@ -88,6 +88,7 @@ public class TaskListFragment extends Fragment implements
 		// Sets onClick listener
 		onClickSetup();
 		onLongClickSetup();
+		Log.d(TAG, "onResume of tasklistfragment");
 	}
 	
 
@@ -135,6 +136,7 @@ public class TaskListFragment extends Fragment implements
 //						DetailedTask.class);
 //				detailedTaskIntent.putExtra("position", position);
 //				startActivity(detailedTaskIntent);
+				taskList.setItemChecked(position, true);
 				taskCallback.onTaskSelected(position);
 			}
 		});

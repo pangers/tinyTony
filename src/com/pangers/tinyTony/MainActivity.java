@@ -27,7 +27,7 @@ public class MainActivity extends FragmentActivity implements
 	private ToDoDatabase database;
 	private DrawerLayout drawerLayout;
 	private ListView drawerList;
-	private ActionBarDrawerToggle drawerToggle;
+	public ActionBarDrawerToggle drawerToggle;
 
 	private final static String TAG = "MainActivity";
 
@@ -83,9 +83,7 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d(TAG, "onResume()");
-		// drawerToggle.setDrawerIndicatorEnabled(true);
-
+		Log.d(TAG, "onResume() of main activity");
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -186,6 +184,7 @@ public class MainActivity extends FragmentActivity implements
 					.addToBackStack("DETAILTASK").commit();
 			// we are in one pane layout
 		} else {
+			drawerToggle.setDrawerIndicatorEnabled(false);
 			Log.d(TAG, "onTaskSelected() one pane");
 			DetailedTask detTask = new DetailedTask();
 			Bundle args = new Bundle();
@@ -222,6 +221,7 @@ public class MainActivity extends FragmentActivity implements
 			this.finish();
 		}
 		super.onBackPressed();
+		drawerToggle.setDrawerIndicatorEnabled(true);
 		
 	}
 }
